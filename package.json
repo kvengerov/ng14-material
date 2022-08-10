@@ -9,10 +9,6 @@
     "test": "ng test",
     "lint": "ng lint"
   },
-  "hooks": {
-    "pre-commit": "ng lint",
-    "pre-push": "ng build --aot true"
-  },
   "lint-staged": {
     "*.{js,ts}": [
       "eslint"
