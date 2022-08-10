@@ -9,11 +9,9 @@
     "test": "ng test",
     "lint": "ng lint"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "ng lint",
-      "pre-push": "ng build --aot true"
-    }
+  "hooks": {
+    "pre-commit": "ng lint",
+    "pre-push": "ng build --aot true"
   },
   "lint-staged": {
     "*.{js,ts}": [
