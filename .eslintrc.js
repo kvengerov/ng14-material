@@ -1,69 +1,81 @@
 module.exports = {
   root: true,
-  ignorePatterns: [
-    'projects/**/*'
-  ],
+  ignorePatterns: ['projects/**/*'],
   overrides: [
     {
-      files: [
-        '*.ts'
-      ],
+      files: ['*.component.ts', '*.page.ts'],
+      extends: [
+        'plugin:@angular-eslint/template/process-inline-templates',
+      ]
+    }, // *.component.ts, *.page.ts
+    {
+      files: ['*.ts'],
       parserOptions: {
-        project: [
-          'tsconfig.json'
-        ],
+        project: ['tsconfig.json'],
         createDefaultProgram: true
       },
       extends: [
         'plugin:@angular-eslint/recommended',
         'airbnb-typescript/base',
-        'prettier/@typescript-eslint',
-        'plugin:prettier/recommended'
+        'plugin:prettier/recommended',
+        'prettier',
       ],
+      plugins: ['import'],
+      settings: {
+        'import/extensions': ['.js', '.ts'],
+        'import/parsers': {
+          '@typescript-eslint/parser': ['.js', '.ts'],
+        },
+        'import/resolver': {
+          node: {
+            extensions: ['.js', '.ts'],
+          },
+        },
+      },
       rules: {
+        'import/no-unresolved': 'off',
+        'import/prefer-default-export': 'off',
+        'class-methods-use-this': 'off',
+        'lines-between-class-members': 'off',
+        'import/no-extraneous-dependencies': [
+          'error',
+          {
+            'devDependencies': false,
+            'optionalDependencies': false,
+            'peerDependencies': false,
+          },
+        ],
+        '@typescript-eslint/unbound-method': [
+          'error',
+          {
+            ignoreStatic: true,
+          },
+        ],
         '@angular-eslint/directive-selector': [
           'error',
           {
-            type: 'attribute',
-            prefix: 'app',
-            style: 'camelCase'
+            'type': 'attribute',
+            'prefix': 'app',
+            'style': 'camelCase'
           }
         ],
         '@angular-eslint/component-selector': [
           'error',
           {
-            type: 'element',
-            prefix: 'app',
-            style: 'kebab-case'
+            'type': 'element',
+            'prefix': 'app',
+            'style': 'kebab-case'
           }
-        ],
-        'sort-imports': [
-          'error',
-          {
-            ignoreCase: false,
-            ignoreDeclarationSort: false,
-            ignoreMemberSort: false,
-            memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
-            allowSeparatedGroups: false
-          }
-        ],
-        'import/no-unresolved': 'off',
-        'import/prefer-default-export': 'off',
-        'class-methods-use-this': 'off',
-        'lines-between-class-members': 'off',
+        ]
       }
-    },
+    }, // *.ts
     {
-      files: [
-        '*.html'
-      ],
+      files: ['*.html'],
       extends: [
-        'plugin:@angular-eslint/template/recommended',
-        'prettier/@typescript-eslint',
-        'plugin:prettier/recommended'
+        'plugin:@angular-eslint/template/recommended'
       ],
       rules: {}
-    },
+    }, // *.html
     {
       files: ['src/**/*.spec.ts', 'src/**/*.d.ts'],
       parserOptions: {
@@ -73,8 +85,8 @@ module.exports = {
       plugins: ['jasmine'],
       env: { jasmine: true },
       rules: {
-        '@typescript-eslint/no-unused-vars': 'off',
-      },
-    }
+        '@typescript-eslint/no-unused-vars': 'off'
+      }
+    }, // src/**/*.spec.ts, src/**/*.d.ts
   ]
 }
