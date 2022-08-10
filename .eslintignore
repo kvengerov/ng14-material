@@ -1,6 +1,10 @@
-package.json
-package-lock.json
+node_modules
 dist
 e2e/**
+
+package.json
+package-lock.json
 karma.conf.js
 commitlint.config.js
+src/main.ts
+src/polyfills.ts
